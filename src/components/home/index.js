@@ -5,6 +5,13 @@ export default class Home extends Component {
 		super();
 		this.handleSubmit = this.handleSubmit.bind(this)
 	}
+	componentDidMount() {
+		this.context.router.setRouteLeaveHook(this.props.route, this.routerWillLeave)
+	}
+	routerWillLeave() {
+		let answer = window.confirm('Вы уверены?')
+		if (!answer) return false
+	}
 	handleSubmit(e) {
 		e.preventDefault()
 		const value = e.target.elements[0].value.toLowerCase()
